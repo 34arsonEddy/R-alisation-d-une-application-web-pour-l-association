@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <div th:replace="~{header :: myHeader}"></div>
+  <link href="@{/css/detail-membre.css}" rel="stylesheet">
+</head>
+<body class="sb-nav-fixed">
+<div id="layoutSidenav">
+  <div th:replace="~{sidebar :: mySidebar}"></div>
+  <div id="layoutSidenav_content">
+    <div class="container">
+      <div th:replace="~{navbar :: myNavbar}"></div>
+
+      <hr>
+      <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="/membres">Membres</a></li>
+        <li class="breadcrumb-item active">Detail</li>
+      </ol>
+
+      <div class="detail shadow">
+        <div class="row">
+          <div class="col-md-3 mx-5 mb-4">
+            <img class="rounded-circle w-75 shadow-sm p-1" th:src="@{/img/harry_potter.jpg}"/>
+          </div>
+
+          <div class="col-md-7 mx-2 pt-3 affichage">
+            <h2><b  th:text="${membre.nom}"></b></h2>
+            <h4>Numero : <b id="teste" th:text="${membre.matricule}"></b></h4>
+            <hr>
+
+            <p>
+              <label>Adresse: </label>
+              <input id="adresse" name="adresse" th:value="${membre.adresse}" >
+            </p>
+            <p>
+              <label>Date et lieu de Naissance: </label>
+              <input type="date" id="dateNaiss" name="dateNaiss" th:value="${membre.dateNaiss}" >
+              <label> à </label>
+              <input id="lieuNaiss" name="lieuNaiss" th:value="${membre.lieuNaiss}" >
+            </p>
+            <p>
+              <label>Telephone: </label>
+              <input name="tel" id="tel" th:value="${membre.tel}">
+            </p>
+            <p>
+              <label>Année Bacc: </label>
+              <input id="anneeBacc" name="annebacc" th:value="${membre.anneeBacc}">
+            </p>
+            <p>
+              <label>Cycle: </label>
+              <input id="cycle"name="cycle" th:value="${membre.cycle}">
+            </p>
+            <p><label>Ecole: </label>
+              <input id="ecole" name="ecole" th:value="${membre.ecole}">
+            </p>
+            <p>
+              <label>Niveau: </label>
+              <input id="niveau" name="niveau" th:value="${membre.niveau}">
+            </p>
+            <p>
+              <label>Filiere: </label>
+              <input id="filiere" name="filiere" th:value="${membre.fifiere}">
+            </p>
+            <p>
+              <label>Situation matrimoniale: </label>
+              <input id="situationMatrimoniale" name="situationMatrimoniale" th:value="membre.situationMatrimoniale">
+            </p>
+            <p th:if="${#lists.isEmpty(maisons)}">
+              <label>Maison Association: </label>
+              <i th:each="m : ${maisons}">
+              <a th:text="${m.code}" href="#"></a>.</i>
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+<div th:replace="~{footer :: myFooter}"></div>
+
+<script th:src="@{/js/membre/detail-membre.js}"></script>
+</body>
+</html>
+
+
+
+
+

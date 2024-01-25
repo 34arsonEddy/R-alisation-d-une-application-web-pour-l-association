@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="~{header :: myHeader}"></div>
+    <link rel="stylesheet" href="@{/css/membre/view-membre.css}">
+</head>
+<style>
+    @media print{
+        .breadcrumb{
+            display:none;
+        }
+    }
+</style>
+<body class="sb-nav-fixed">
+<div id="layoutSidenav">
+    <div th:replace="~{sidebar :: mySidebar}"></div>
+    <div id="layoutSidenav_content">
+        <div class="container">
+            <div th:replace="~{navbar :: myNavbar}"></div>
+
+            <hr>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+                <li class="breadcrumb-item active">Membres</li>
+            </ol>
+            <button style="font-size: 20px" type="button" class="btn-sm btn-outline-dark" id="myButton">
+                Ajouter nouveau membre <i class="fa fa-plus"></i>
+            </button>
+            <br> <br>
+            <table class="table-sm table-bordered table-hover mx-auto">
+                <thead class="thead-dark">
+                <tr>
+                    <th style="display:none">id</th>
+                    <th>matricule</th>
+                    <th>nom</th>
+                    <th>adresse</th>
+                    <th>Date et lieu de Naissance</th>
+                    <th>ecole</th>
+                    <th>niveau</th>
+                    <th>filiere</th>
+                    <th>annéeBacc</th>
+                    <th colspan="3">Options</th>
+                </tr>
+                </thead>
+                <tbody th:if="${#lists.isEmpty(membres)}">
+                <tr>
+                    <td colspan="3" style="color: red;">No Data found</td>
+                </tr>
+                </tbody>
+                <tbody id="myTable">
+                <tr th:each="m : ${membres}" id="tr" onclick="redirection('/membres/detail',this.cells.item(0).innerText)" style="cursor:pointer">
+                    <td th:text="${m.id}" style="display:none"></td>
+                    <td th:text="${m.matricule}"></td>
+                    <td th:text="${m.nom}"></td>
+                    <td th:text="${m.adresse}"></td>
+                    <td><span th:text="${m.dateNaiss}"></span> à <span th:text="${m.lieuNaiss}"></span></td>
+                    <td th:text="${ecole}"></td>
+                    <td th:text="${niveau}"></td>
+                    <td th:text="${filiere}"></td>
+                    <td th:text="${anneeBacc}"></td>
+                    <td><a th:href="@{/membres/Editer/{id}(id=${m.id})}"
+                           class="btn btn-primary btn-sm"> modifier </a></td>
+                    <td><a th:href="@{/membres/Supprimer/{id}(id=${m.id})}"
+                           class="btn btn-danger btn-sm"> supprimer </a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <script type="text/javascript">
+
+				document.getElementById("myButton").onclick = function() {
+					location.href = "creerMembre";
+				};
+
+				function redirection(url,data) {
+					location.href = url+"/"+data;
+				};
+
+			</script>
+    </div>
+</div>
+
+<div th:replace="~{footer :: myFooter}"></div>
+</body>
+</html>
+
+
+
+
+
